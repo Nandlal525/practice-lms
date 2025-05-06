@@ -3,7 +3,8 @@ import Button from "../component/button";
 import Input from "../component/input";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,8 +26,10 @@ const Login = () => {
       localStorage.setItem("token", response.data.token);
       navigate("/");
       console.log(response);
+      toast.success("welcome");
     } catch (err) {
       console.log(err);
+      toast.error("invalid error");
     }
   };
 
@@ -48,6 +51,12 @@ const Login = () => {
           />
           <Button content="Login" type="submit" className="bg-blue-600" />
         </form>
+        <p>
+          Don't have an account
+          <NavLink className="text-blue-400 ml-1 hover:underline" to="/register">
+            Register
+          </NavLink>
+        </p>
       </div>
     </div>
   );

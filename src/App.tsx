@@ -3,7 +3,6 @@ import Register from "./pages/register";
 import AppLayout from "./layout/appLayout";
 import Login from "./pages/login";
 import { jwtDecode } from "jwt-decode";
-import { ToastContainer, toast } from 'react-toastify';
 
 const ProtectedRoutes = () => {
   const token = localStorage.getItem("token");
@@ -19,17 +18,14 @@ const ProtectedRoutes = () => {
   // if token is invalid, redirect to login
   return decodedToken ? <AppLayout /> : <Navigate to="/login" />;
 };
-
 function App() {
-  const notify = () => toast("Wow so easy!");
   return (
     
     <Routes>
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<ProtectedRoutes />}>
-      <button onClick={notify}>Notify!</button>
-      <ToastContainer />
+      
         {/* These routes is rendered by Outlet in AppLayout */}
         <Route path="/books" element={<p>Books</p>} />
         <Route path="/members" element={<p>Members</p>} />
